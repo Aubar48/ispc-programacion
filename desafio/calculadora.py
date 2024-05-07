@@ -108,27 +108,33 @@ def menu():
     print("0. Salir del codigo. \n")
 
 
+def switch(opcion):
+    while True:  # Agregar un bucle para volver al menú principal después de cada operación
+        opciones = {
+            0: lambda: None,
+            1: suma,
+            2: resta,
+            3: multiplicar,
+            4: dividir,
+            5: raiz,
+            6: potencia,
+            7: cociente
+        }
+        if opcion in opciones:
+            resultado = opciones[opcion]()
+            if resultado is not None:
+                print("El resultado es:", resultado)
+            break  # Salir del bucle después de realizar la operación
+        else:
+            print("Opción no válida")
+
 while True:
     try:
         menu()
-        opcion = int(input("Seleccione una opción del menú: "))
+        opcion = int(input("Seleccione una opcion del menu: "))
         if opcion == 0:
             break
-        elif opcion == 1:
-            print("La suma es: ", suma())
-        elif opcion == 2:
-            print("La resta es: ", resta())
-        elif opcion == 3:
-            print("El producto es: ", multiplicar())
-        elif opcion == 4:
-            print("La división es: ", dividir())
-        elif opcion == 5:
-            print("La raíz cuadrada es: ", raiz())
-        elif opcion == 6:
-            print("La potencia es: ", potencia())
-        elif opcion == 7:
-            print("El cociente es: ", cociente())
         else:
-            print("Opción no válida. Por favor, seleccione una opción válida.")
-    except Exception as e:
-        print("Por favor, ingrese un número entero válido. Error: ", str(e))
+            switch(opcion)
+    except ValueError:
+        print("Por favor, ingrese un numero entero valido.")
